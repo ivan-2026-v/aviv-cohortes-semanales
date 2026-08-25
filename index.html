@@ -527,7 +527,6 @@
               <th class="stage">→ Inbox<span class="stage-n">alta en plataforma</span></th>
               <th class="stage">Conocim. inicial<span class="stage-n">WhatsApp · etapa 1</span></th>
               <th class="stage">Entrevista<span class="stage-n">agendada</span></th>
-              <th class="stage">Asistencia<span class="stage-n">a entrevista</span></th>
               <th class="stage">Entrevista<span class="stage-n">completada</span></th>
               <th class="stage">Eval. psicológica<span class="stage-n">completada</span></th>
               <th class="stage">Examen médico<span class="stage-n">completado</span></th>
@@ -655,7 +654,6 @@ document.getElementById('tbody').innerHTML = WEEKS.map(w => {
     ${cell(w.inbox_n, w.conv_to_inbox_pct)}
     ${cell(w.s1_n, w.s1_pct)}
     ${cell(w.s2_sched_n, w.s2_sched_pct)}
-    ${cell(w.s2_attended_n, w.s2_attended_pct)}
     ${cell(w.s2_n, w.s2_pct)}
     ${cell(w.s3_n, w.s3_pct)}
     ${cell(w.s4_n, w.s4_pct)}
@@ -672,7 +670,6 @@ document.getElementById('tfoot').innerHTML = `
     <td class="num">${n(TOTALS.inbox_n)}</td>
     <td class="num">${n(TOTALS.s1_n)}</td>
     <td class="num">${n(WEEKS.reduce((a,w)=>a+w.s2_sched_n,0))}</td>
-    <td class="num">${n(TOTALS.s2_attended_n)}</td>
     <td class="num">${n(TOTALS.s2_n)}</td>
     <td class="num">${n(TOTALS.s3_n)}</td>
     <td class="num">${n(TOTALS.s4_n)}</td>
