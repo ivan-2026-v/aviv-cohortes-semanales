@@ -1,0 +1,684 @@
+<title>Cohortes Semanales Aviv</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #F4F5F0;
+    --surface: #FFFFFF;
+    --surface-2: #EBEDE5;
+    --surface-3: #E1E4DA;
+    --border: #D7DACE;
+    --text: #1C211C;
+    --text-muted: #5D655B;
+    --text-faint: #8A9186;
+
+    --accent: #B5651D;
+    --accent-ink: #7C4413;
+    --accent-soft: #F0DEC5;
+
+    --accent2: #24506B;
+    --accent2-soft: #DCE7EC;
+
+    --good: #3F8F6F;
+    --good-soft: #DCEEE6;
+    --good-ink: #245C46;
+
+    --warn: #B9821F;
+    --warn-soft: #F3E6C7;
+    --warn-ink: #7A5510;
+
+    --bad: #B14A3D;
+    --bad-soft: #F5DFDA;
+    --bad-ink: #7C3226;
+
+    --shadow: 0 1px 2px rgba(28,33,28,0.04), 0 4px 16px rgba(28,33,28,0.05);
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #151915;
+      --surface: #1D2219;
+      --surface-2: #242A20;
+      --surface-3: #2C3327;
+      --border: #384033;
+      --text: #E9ECE3;
+      --text-muted: #A3AB99;
+      --text-faint: #737B6C;
+
+      --accent: #E0954A;
+      --accent-ink: #F6C48A;
+      --accent-soft: #3A2C16;
+
+      --accent2: #7BAFCF;
+      --accent2-soft: #1E323E;
+
+      --good: #5FBB95;
+      --good-soft: #17301F;
+      --good-ink: #8FD3B4;
+
+      --warn: #E0B15A;
+      --warn-soft: #362C14;
+      --warn-ink: #F0CE8F;
+
+      --bad: #E38677;
+      --bad-soft: #3A211C;
+      --bad-ink: #F0AB9F;
+
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #151915;
+    --surface: #1D2219;
+    --surface-2: #242A20;
+    --surface-3: #2C3327;
+    --border: #384033;
+    --text: #E9ECE3;
+    --text-muted: #A3AB99;
+    --text-faint: #737B6C;
+
+    --accent: #E0954A;
+    --accent-ink: #F6C48A;
+    --accent-soft: #3A2C16;
+
+    --accent2: #7BAFCF;
+    --accent2-soft: #1E323E;
+
+    --good: #5FBB95;
+    --good-soft: #17301F;
+    --good-ink: #8FD3B4;
+
+    --warn: #E0B15A;
+    --warn-soft: #362C14;
+    --warn-ink: #F0CE8F;
+
+    --bad: #E38677;
+    --bad-soft: #3A211C;
+    --bad-ink: #F0AB9F;
+
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+  }
+
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection{ background: var(--accent-soft); }
+
+  .page{
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.75rem;
+  }
+
+  /* ---------- Header ---------- */
+  .eyebrow{
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .eyebrow .dot{
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    display: inline-block;
+  }
+  h1{
+    font-family: "Big Shoulders Display", ui-sans-serif, sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.4rem, 4.2vw, 3.4rem);
+    line-height: 0.98;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+    margin: 0.3rem 0 0;
+    color: var(--text);
+  }
+  .subhead{
+    margin-top: 0.85rem;
+    max-width: 62ch;
+    color: var(--text-muted);
+    font-size: 0.98rem;
+  }
+  .subhead b{ color: var(--text); font-weight: 600; }
+
+  .meta-row{
+    margin-top: 1.4rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.9rem;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.76rem;
+    color: var(--text-faint);
+  }
+  .meta-row span b{ color: var(--text-muted); font-weight: 500; }
+
+  /* ---------- KPI strip ---------- */
+  .kpis{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .kpi{
+    background: var(--surface);
+    padding: 1.3rem 1.3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .kpi .val{
+    font-family: "IBM Plex Mono", monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 1.85rem;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  .kpi .val small{ font-size: 1rem; font-weight: 500; color: var(--text-faint); }
+  .kpi .lbl{
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+  .kpi .sub{
+    font-size: 0.72rem;
+    color: var(--text-faint);
+  }
+
+  /* ---------- Callouts ---------- */
+  .callouts{
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 1.1rem;
+  }
+  @media (max-width: 880px){ .callouts{ grid-template-columns: 1fr; } }
+
+  .callout{
+    border-radius: 14px;
+    padding: 1.4rem 1.5rem;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .callout.bad{ background: var(--bad-soft); border-color: color-mix(in srgb, var(--bad) 35%, var(--border)); }
+  .callout.warn{ background: var(--warn-soft); border-color: color-mix(in srgb, var(--warn) 35%, var(--border)); }
+
+  .callout .tag{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    width: fit-content;
+    padding: 0.22rem 0.55rem;
+    border-radius: 999px;
+  }
+  .callout.bad .tag{ color: var(--bad-ink); background: color-mix(in srgb, var(--bad) 22%, transparent); }
+  .callout.warn .tag{ color: var(--warn-ink); background: color-mix(in srgb, var(--warn) 22%, transparent); }
+
+  .callout h3{
+    margin: 0;
+    font-family: "Big Shoulders Display", sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.005em;
+  }
+  .callout.bad h3{ color: var(--bad-ink); }
+  .callout.warn h3{ color: var(--warn-ink); }
+  .callout p{ margin: 0; color: var(--text); font-size: 0.9rem; }
+  .callout p.muted{ color: var(--text-muted); font-size: 0.82rem; }
+
+  .trend{
+    display: flex;
+    align-items: flex-end;
+    gap: 0.5rem;
+    height: 64px;
+    margin-top: 0.2rem;
+  }
+  .trend .bar-wrap{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    flex: 1;
+  }
+  .trend .bar{
+    width: 100%;
+    max-width: 30px;
+    border-radius: 4px 4px 2px 2px;
+    background: var(--warn);
+  }
+  .trend .bar-lbl{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.62rem;
+    color: var(--text-faint);
+  }
+  .trend .bar-val{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.66rem;
+    font-weight: 600;
+    color: var(--warn-ink);
+  }
+
+  /* ---------- Section heading ---------- */
+  .section-head{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .section-head h2{
+    font-family: "Big Shoulders Display", sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin: 0;
+    letter-spacing: -0.005em;
+  }
+  .section-head .note{
+    font-size: 0.8rem;
+    color: var(--text-faint);
+  }
+  .legend{
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: 0.74rem;
+    color: var(--text-muted);
+  }
+  .legend .sw{
+    display:inline-flex; align-items:center; gap: 0.35rem;
+  }
+  .legend .sw i{
+    width: 9px; height: 9px; border-radius: 2px; display:inline-block;
+  }
+
+  /* ---------- Table ---------- */
+  .table-shell{
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: var(--surface);
+  }
+  .table-scroll{
+    overflow-x: auto;
+  }
+  table{
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 1220px;
+  }
+  thead th{
+    position: sticky;
+    top: 0;
+    background: var(--surface-2);
+    z-index: 2;
+    text-align: left;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 0.85rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  thead th.stage{ text-align: center; }
+  thead th .stage-n{ display:block; color: var(--text-faint); font-weight: 400; text-transform: none; letter-spacing: 0; margin-top: 1px; }
+
+  tbody td{
+    padding: 0.8rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  tbody tr:last-child td{ border-bottom: none; }
+  tbody tr:hover td{ background: var(--surface-2); }
+  tbody tr.immature td{ opacity: 0.72; }
+
+  td.week-cell{
+    position: sticky;
+    left: 0;
+    background: var(--surface);
+    z-index: 1;
+    border-right: 1px solid var(--border);
+  }
+  tbody tr:hover td.week-cell{ background: var(--surface-2); }
+  .week-lbl{
+    font-weight: 600;
+    font-size: 0.86rem;
+    color: var(--text);
+  }
+  .week-range{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.68rem;
+    color: var(--text-faint);
+    margin-top: 1px;
+  }
+  .chip{
+    display: inline-block;
+    margin-top: 0.35rem;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.12rem 0.4rem;
+    border-radius: 999px;
+    background: var(--accent2-soft);
+    color: var(--accent2);
+  }
+  .chip.total{ background: var(--surface-3); color: var(--text-muted); }
+
+  td.num{ text-align: center; }
+  .cell-n{
+    font-family: "IBM Plex Mono", monospace;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--text);
+  }
+  .cell-pct{
+    font-family: "IBM Plex Mono", monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.72rem;
+    color: var(--text-faint);
+    margin-top: 1px;
+  }
+  .cell-pct.hi{ color: var(--good-ink); font-weight: 600; }
+  .cell-pct.lo{ color: var(--bad-ink); font-weight: 600; }
+  .cell-pct.mid{ color: var(--warn-ink); font-weight: 600; }
+
+  td.spark{ padding-left: 1rem; padding-right: 1rem; }
+  .funnel-bars{
+    display: flex;
+    align-items: flex-end;
+    gap: 2.5px;
+    height: 34px;
+    width: 150px;
+  }
+  .funnel-bars i{
+    flex: 1;
+    border-radius: 1.5px 1.5px 0 0;
+    min-height: 2px;
+    display: block;
+  }
+
+  tfoot td{
+    padding: 0.9rem 0.9rem;
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 600;
+    font-size: 0.86rem;
+    background: var(--surface-2);
+    border-top: 2px solid var(--border);
+    color: var(--text);
+  }
+  tfoot td.week-cell{ background: var(--surface-2); }
+
+  /* ---------- Footnotes ---------- */
+  .foot{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.6rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.6rem;
+  }
+  @media (max-width: 880px){ .foot{ grid-template-columns: 1fr; } }
+  .foot h4{
+    margin: 0 0 0.4rem;
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .foot p, .foot li{
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--text-faint);
+    line-height: 1.55;
+  }
+  .foot ul{ margin: 0; padding-left: 1.1rem; display:flex; flex-direction:column; gap:0.3rem; }
+
+  @media (prefers-reduced-motion: no-preference){
+    .kpi, .callout, .table-shell{ animation: rise 0.5s ease both; }
+    .kpi:nth-child(2){ animation-delay: .04s; }
+    .kpi:nth-child(3){ animation-delay: .08s; }
+    .kpi:nth-child(4){ animation-delay: .12s; }
+    .kpi:nth-child(5){ animation-delay: .16s; }
+  }
+  @keyframes rise{ from{ opacity:0; transform: translateY(6px); } to{ opacity:1; transform: translateY(0); } }
+</style>
+
+<div class="page">
+
+  <header>
+    <div class="eyebrow"><span class="dot"></span>Reporte operativo · Reclutamiento WhatsApp</div>
+    <h1>Cohortes semanales — Aviv</h1>
+    <p class="subhead">Cada cohorte agrupa a los candidatos según <b>su semana de ingreso a la plataforma</b> (alta en Inbox) y sigue su avance etapa por etapa. Los porcentajes se calculan siempre sobre el tamaño de la cohorte de esa semana.</p>
+    <div class="meta-row" id="metaRow"></div>
+  </header>
+
+  <section class="kpis" id="kpiStrip"></section>
+
+  <section class="callouts">
+    <div class="callout bad">
+      <span class="tag">⚠ Hallazgo crítico</span>
+      <h3>Semana del 13 jul: pérdida total de la cohorte</h3>
+      <p>De <b>55 candidatos</b> que ingresaron esa semana (la primera con datos), <b>45 fueron rechazados y 10 se retiraron</b> — ninguno completó ni la primera etapa ("Conocimiento Inicial en WhatsApp"). Consistente con una semana de arranque con fallas de configuración del bot.</p>
+      <p class="muted">0 de 0 candidatos activos hoy en esta cohorte · 42 días de antigüedad, tiempo de sobra para progresar.</p>
+    </div>
+    <div class="callout warn">
+      <span class="tag">↓ Tendencia</span>
+      <h3>La asistencia a entrevista se está desplomando</h3>
+      <p>De los candidatos que <b>sí agendan</b> entrevista, el % que efectivamente asiste cayó de 19.2% (20 jul) a 2.0% (17 ago) semana tras semana.</p>
+      <div class="trend" id="attendTrend"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div>
+        <h2>Embudo por cohorte semanal</h2>
+        <div class="note">Guardia Elite (JO-2262) · fuente: Nexiu ATS · candidatos agrupados por fecha de alta en Inbox</div>
+      </div>
+      <div class="legend">
+        <span class="sw"><i style="background:var(--accent2)"></i>Conversación → Inbox</span>
+        <span class="sw"><i style="background:var(--accent)"></i>Etapas de avance</span>
+        <span class="sw"><i style="background:var(--good)"></i>Asistencia / completado</span>
+        <span class="sw"><i style="background:var(--bad)"></i>0% o crítico</span>
+      </div>
+    </div>
+
+    <div class="table-shell">
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th style="position:sticky;left:0;background:var(--surface-2);z-index:3;">Semana de ingreso</th>
+              <th class="stage">Conversaciones<span class="stage-n">iniciadas</span></th>
+              <th class="stage">→ Inbox<span class="stage-n">alta en plataforma</span></th>
+              <th class="stage">Conocim. inicial<span class="stage-n">WhatsApp · etapa 1</span></th>
+              <th class="stage">Entrevista<span class="stage-n">agendada</span></th>
+              <th class="stage">Asistencia<span class="stage-n">a entrevista</span></th>
+              <th class="stage">Entrevista<span class="stage-n">completada</span></th>
+              <th class="stage">Eval. psicológica<span class="stage-n">completada</span></th>
+              <th class="stage">Examen médico<span class="stage-n">completado</span></th>
+              <th class="stage">Estudio socioec.<span class="stage-n">completado</span></th>
+              <th class="stage">Oferta laboral<span class="stage-n">= contratación</span></th>
+              <th class="stage">Forma del embudo</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+          <tfoot id="tfoot"></tfoot>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="foot">
+    <div>
+      <h4>Definiciones</h4>
+      <ul>
+        <li><b style="color:var(--text-muted)">Cohorte semanal</b>: candidatos cuyo registro (job_order_candidates) se creó esa semana calendario (lun–dom).</li>
+        <li><b style="color:var(--text-muted)">%</b>: siempre sobre el tamaño de la cohorte de esa semana (columna "→ Inbox"), no sobre la etapa anterior.</li>
+        <li><b style="color:var(--text-muted)">Asistencia</b>: prioriza <code>meeting_attendance_status</code> (COMPLETE/PARTIAL = asistió); si no existe, usa <code>meeting_recruiter_attendance_confirmed</code>.</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Cómo leer las cohortes recientes</h4>
+      <p>Las semanas del <b style="color:var(--text-muted)">17 ago</b> y <b style="color:var(--text-muted)">24 ago</b> están marcadas como <span class="chip" style="position:static;">en formación</span> — llevan 7 y 0 días desde su ingreso, muy poco tiempo para completar un ciclo que hoy toma ~2-3 semanas. Sus ceros en etapas tardías no son comparables a cohortes maduras.</p>
+    </div>
+    <div>
+      <h4>Fuente y alcance</h4>
+      <p>Nexiu ATS (producción) · Organización Aviv · Job Order 2262 "Guardia Elite" · Conversaciones de WhatsApp vinculadas por <code>whatsapp_id</code>.</p>
+      <p>Generado 24 ago 2026. Datos vivos — recalcular para fechas posteriores.</p>
+    </div>
+  </section>
+
+</div>
+
+<script>
+const WEEKS = [{"week_start": "2026-07-13", "week_end": "2026-07-19", "days_since_start": 42, "conversations_n": 195, "inbox_n": 55, "conv_to_inbox_pct": 28.2, "s1_n": 0, "s1_pct": 0.0, "s2_sched_n": 0, "s2_sched_pct": 0.0, "s2_attended_n": 0, "s2_attended_pct": 0.0, "s2_n": 0, "s2_pct": 0.0, "s3_n": 0, "s3_pct": 0.0, "s4_n": 0, "s4_pct": 0.0, "s5_n": 0, "s5_pct": 0.0, "s6_n": 0, "s6_pct": 0.0, "attend_rate_of_scheduled": null}, {"week_start": "2026-07-20", "week_end": "2026-07-26", "days_since_start": 35, "conversations_n": 259, "inbox_n": 149, "conv_to_inbox_pct": 57.5, "s1_n": 36, "s1_pct": 24.2, "s2_sched_n": 26, "s2_sched_pct": 17.4, "s2_attended_n": 5, "s2_attended_pct": 3.4, "s2_n": 3, "s2_pct": 2.0, "s3_n": 1, "s3_pct": 0.7, "s4_n": 0, "s4_pct": 0.0, "s5_n": 0, "s5_pct": 0.0, "s6_n": 0, "s6_pct": 0.0, "attend_rate_of_scheduled": 19.2}, {"week_start": "2026-07-27", "week_end": "2026-08-02", "days_since_start": 28, "conversations_n": 382, "inbox_n": 202, "conv_to_inbox_pct": 52.9, "s1_n": 80, "s1_pct": 39.6, "s2_sched_n": 59, "s2_sched_pct": 29.2, "s2_attended_n": 9, "s2_attended_pct": 4.5, "s2_n": 9, "s2_pct": 4.5, "s3_n": 3, "s3_pct": 1.5, "s4_n": 1, "s4_pct": 0.5, "s5_n": 0, "s5_pct": 0.0, "s6_n": 0, "s6_pct": 0.0, "attend_rate_of_scheduled": 15.3}, {"week_start": "2026-08-03", "week_end": "2026-08-09", "days_since_start": 21, "conversations_n": 357, "inbox_n": 181, "conv_to_inbox_pct": 50.7, "s1_n": 76, "s1_pct": 42.0, "s2_sched_n": 63, "s2_sched_pct": 34.8, "s2_attended_n": 6, "s2_attended_pct": 3.3, "s2_n": 6, "s2_pct": 3.3, "s3_n": 0, "s3_pct": 0.0, "s4_n": 0, "s4_pct": 0.0, "s5_n": 0, "s5_pct": 0.0, "s6_n": 0, "s6_pct": 0.0, "attend_rate_of_scheduled": 9.5}, {"week_start": "2026-08-10", "week_end": "2026-08-16", "days_since_start": 14, "conversations_n": 347, "inbox_n": 190, "conv_to_inbox_pct": 54.8, "s1_n": 62, "s1_pct": 32.6, "s2_sched_n": 43, "s2_sched_pct": 22.6, "s2_attended_n": 3, "s2_attended_pct": 1.6, "s2_n": 3, "s2_pct": 1.6, "s3_n": 0, "s3_pct": 0.0, "s4_n": 0, "s4_pct": 0.0, "s5_n": 0, "s5_pct": 0.0, "s6_n": 0, "s6_pct": 0.0, "attend_rate_of_scheduled": 7.0}, {"week_start": "2026-08-17", "week_end": "2026-08-23", "days_since_start": 7, "conversations_n": 377, "inbox_n": 202, "conv_to_inbox_pct": 53.6, "s1_n": 64, "s1_pct": 31.7, "s2_sched_n": 51, "s2_sched_pct": 25.2, "s2_attended_n": 1, "s2_attended_pct": 0.5, "s2_n": 1, "s2_pct": 0.5, "s3_n": 0, "s3_pct": 0.0, "s4_n": 0, "s4_pct": 0.0, "s5_n": 0, "s5_pct": 0.0, "s6_n": 0, "s6_pct": 0.0, "attend_rate_of_scheduled": 2.0}, {"week_start": "2026-08-24", "week_end": "2026-08-30", "days_since_start": 0, "conversations_n": 27, "inbox_n": 8, "conv_to_inbox_pct": 29.6, "s1_n": 2, "s1_pct": 25.0, "s2_sched_n": 2, "s2_sched_pct": 25.0, "s2_attended_n": 0, "s2_attended_pct": 0.0, "s2_n": 0, "s2_pct": 0.0, "s3_n": 0, "s3_pct": 0.0, "s4_n": 0, "s4_pct": 0.0, "s5_n": 0, "s5_pct": 0.0, "s6_n": 0, "s6_pct": 0.0, "attend_rate_of_scheduled": 0.0}];
+const TOTALS = {"conversations_n": 1944, "inbox_n": 987, "s1_n": 320, "s2_attended_n": 24, "s2_n": 22, "s3_n": 4, "s4_n": 1, "s5_n": 0, "s6_n": 0};
+
+const MESES = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+function fmtShort(iso){
+  const d = new Date(iso+'T00:00:00');
+  return `${d.getDate()} ${MESES[d.getMonth()]}`;
+}
+function fmtRange(a,b){ return `${fmtShort(a)} – ${fmtShort(b)}`; }
+function n(v){ return v.toLocaleString('es-MX'); }
+
+// ---------- Meta row ----------
+document.getElementById('metaRow').innerHTML = `
+  <span>Cliente <b>Aviv</b></span>
+  <span>Puesto <b>Guardia Elite</b></span>
+  <span>Periodo <b>${fmtShort(WEEKS[0].week_start)} – ${fmtShort(WEEKS[WEEKS.length-1].week_end)}</b></span>
+  <span>Cohortes <b>${WEEKS.length}</b></span>
+  <span>Candidatos <b>${n(TOTALS.inbox_n)}</b></span>
+`;
+
+// ---------- KPI strip ----------
+const kpis = [
+  { val: n(TOTALS.conversations_n), lbl: 'Conversaciones iniciadas', sub: 'todas las cohortes' },
+  { val: n(TOTALS.inbox_n), lbl: 'Candidatos a Inbox', sub: `${(100*TOTALS.inbox_n/TOTALS.conversations_n).toFixed(1)}% de las conversaciones` },
+  { val: n(TOTALS.s1_n), lbl: 'Conocim. inicial completado', sub: `${(100*TOTALS.s1_n/TOTALS.inbox_n).toFixed(1)}% de Inbox` },
+  { val: n(TOTALS.s2_attended_n), lbl: 'Asistieron a entrevista', sub: `${(100*TOTALS.s2_attended_n/TOTALS.inbox_n).toFixed(1)}% de Inbox` },
+  { val: n(TOTALS.s6_n), lbl: 'Ofertas laborales', sub: TOTALS.s6_n === 0 ? 'aún sin contrataciones cerradas' : `${(100*TOTALS.s6_n/TOTALS.inbox_n).toFixed(1)}% de Inbox` },
+];
+document.getElementById('kpiStrip').innerHTML = kpis.map(k => `
+  <div class="kpi">
+    <div class="val">${k.val}</div>
+    <div class="lbl">${k.lbl}</div>
+    <div class="sub">${k.sub}</div>
+  </div>
+`).join('');
+
+// ---------- Attendance trend (of scheduled) ----------
+const trendWeeks = WEEKS.filter(w => w.s2_sched_n > 0 || w.attend_rate_of_scheduled !== null);
+const maxTrend = 20;
+document.getElementById('attendTrend').innerHTML = trendWeeks.map(w => {
+  const v = w.attend_rate_of_scheduled ?? 0;
+  const h = Math.max(4, Math.round((v/maxTrend)*64));
+  return `<div class="bar-wrap">
+    <div class="bar-val">${v.toFixed(0)}%</div>
+    <div class="bar" style="height:${h}px"></div>
+    <div class="bar-lbl">${fmtShort(w.week_start)}</div>
+  </div>`;
+}).join('');
+
+// ---------- Table ----------
+function pctClass(p){
+  if (p === 0) return 'lo';
+  if (p >= 15) return 'hi';
+  if (p >= 3) return 'mid';
+  return 'lo';
+}
+function cell(nVal, pVal, opts={}){
+  const cls = opts.forcePct ? opts.forcePct : pctClass(pVal);
+  return `<td class="num">
+    <div class="cell-n">${n(nVal)}</div>
+    <div class="cell-pct ${cls}">${pVal.toFixed(1)}%</div>
+  </td>`;
+}
+
+const stageColors = ['var(--accent2)','var(--accent)','var(--accent)','var(--good)','var(--good)','var(--good)','var(--good)'];
+
+function funnelBars(w){
+  const vals = [100, w.s1_pct, w.s2_sched_pct, w.s2_attended_pct, w.s3_pct, w.s4_pct, w.s6_pct];
+  const max = 100;
+  return `<div class="funnel-bars">${vals.map((v,i) => {
+    const h = Math.max(2, Math.round((v/max)*34));
+    const color = v === 0 ? 'var(--bad)' : stageColors[i];
+    const op = v === 0 ? '0.35' : '1';
+    return `<i style="height:${h}px;background:${color};opacity:${op}" title="${v.toFixed(1)}%"></i>`;
+  }).join('')}</div>`;
+}
+
+document.getElementById('tbody').innerHTML = WEEKS.map(w => {
+  const immature = w.days_since_start < 14;
+  return `<tr class="${immature ? 'immature' : ''}">
+    <td class="week-cell">
+      <div class="week-lbl">${fmtShort(w.week_start)}</div>
+      <div class="week-range">${fmtRange(w.week_start, w.week_end)}</div>
+      ${immature ? `<span class="chip">en formación · ${w.days_since_start}d</span>` : ''}
+    </td>
+    <td class="num"><div class="cell-n">${n(w.conversations_n)}</div></td>
+    ${cell(w.inbox_n, w.conv_to_inbox_pct)}
+    ${cell(w.s1_n, w.s1_pct)}
+    ${cell(w.s2_sched_n, w.s2_sched_pct)}
+    ${cell(w.s2_attended_n, w.s2_attended_pct)}
+    ${cell(w.s2_n, w.s2_pct)}
+    ${cell(w.s3_n, w.s3_pct)}
+    ${cell(w.s4_n, w.s4_pct)}
+    ${cell(w.s5_n, w.s5_pct)}
+    ${cell(w.s6_n, w.s6_pct)}
+    <td class="spark">${funnelBars(w)}</td>
+  </tr>`;
+}).join('');
+
+document.getElementById('tfoot').innerHTML = `
+  <tr>
+    <td class="week-cell">Total · ${WEEKS.length} cohortes</td>
+    <td class="num">${n(TOTALS.conversations_n)}</td>
+    <td class="num">${n(TOTALS.inbox_n)}</td>
+    <td class="num">${n(TOTALS.s1_n)}</td>
+    <td class="num">${n(WEEKS.reduce((a,w)=>a+w.s2_sched_n,0))}</td>
+    <td class="num">${n(TOTALS.s2_attended_n)}</td>
+    <td class="num">${n(TOTALS.s2_n)}</td>
+    <td class="num">${n(TOTALS.s3_n)}</td>
+    <td class="num">${n(TOTALS.s4_n)}</td>
+    <td class="num">${n(TOTALS.s5_n)}</td>
+    <td class="num">${n(TOTALS.s6_n)}</td>
+    <td></td>
+  </tr>
+`;
+</script>
