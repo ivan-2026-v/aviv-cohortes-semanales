@@ -211,6 +211,9 @@
     gap: 1.1rem;
   }
   @media (max-width: 880px){ .callouts{ grid-template-columns: 1fr; } }
+  .callouts.single{
+    grid-template-columns: minmax(0, 620px);
+  }
 
   .callout{
     border-radius: 14px;
@@ -488,13 +491,7 @@
 
   <section class="kpis" id="kpiStrip"></section>
 
-  <section class="callouts">
-    <div class="callout bad">
-      <span class="tag">⚠ Hallazgo crítico</span>
-      <h3>Semana del 13 jul: pérdida total de la cohorte</h3>
-      <p>De <b>55 candidatos</b> que ingresaron esa semana (la primera con datos), <b>45 fueron rechazados y 10 se retiraron</b> — ninguno completó ni la primera etapa ("Conocimiento Inicial en WhatsApp"). Consistente con una semana de arranque con fallas de configuración del bot.</p>
-      <p class="muted">0 de 0 candidatos activos hoy en esta cohorte · 50 días de antigüedad, tiempo de sobra para progresar.</p>
-    </div>
+  <section class="callouts single">
     <div class="callout warn">
       <span class="tag">↓ Tendencia</span>
       <h3>La asistencia a entrevista se está desplomando</h3>
