@@ -482,7 +482,7 @@
   <header>
     <div class="eyebrow"><span class="dot"></span>Reporte operativo · Reclutamiento WhatsApp</div>
     <h1>Cohortes semanales — Aviv</h1>
-    <p class="subhead">Cada cohorte agrupa a los candidatos según <b>su semana de ingreso a la plataforma</b> (alta en Inbox) y sigue su avance etapa por etapa. Los porcentajes se calculan siempre sobre el tamaño de la cohorte de esa semana.</p>
+    <p class="subhead">Cada cohorte agrupa a los candidatos según <b>su semana de ingreso a la plataforma</b> (alta en Inbox) y sigue su avance etapa por etapa. Los porcentajes son <b>conversión escalonada</b>: cada etapa se mide sobre la etapa inmediatamente anterior, no sobre el total de la cohorte.</p>
     <div class="meta-row" id="metaRow"></div>
   </header>
 
@@ -547,7 +547,7 @@
       <h4>Definiciones</h4>
       <ul>
         <li><b style="color:var(--text-muted)">Cohorte semanal</b>: candidatos cuyo registro (job_order_candidates) se creó esa semana calendario (lun–dom).</li>
-        <li><b style="color:var(--text-muted)">%</b>: siempre sobre el tamaño de la cohorte de esa semana (columna "→ Inbox"), no sobre la etapa anterior.</li>
+        <li><b style="color:var(--text-muted)">%</b>: conversión escalonada — cada etapa dividida entre la etapa inmediatamente anterior en la tabla (ej. Entrevista completada ÷ Entrevista agendada). "—" indica que la etapa anterior tuvo 0 candidatos.</li>
         <li><b style="color:var(--text-muted)">Asistencia</b>: prioriza <code>meeting_attendance_status</code> (COMPLETE/PARTIAL = asistió); si no existe, usa <code>meeting_recruiter_attendance_confirmed</code>.</li>
       </ul>
     </div>
@@ -565,8 +565,8 @@
 </div>
 
 <script>
-const WEEKS = [{"week_start": "2026-07-13", "week_end": "2026-07-19", "days_since_start": 50, "conversations_n": 195, "inbox_n": 55, "conv_to_inbox_pct": 28.2, "s1_n": 0, "s1_pct": 0.0, "s2_sched_n": 0, "s2_sched_pct": 0.0, "s2_attended_n": 0, "s2_attended_pct": 0.0, "s2_n": 0, "s2_pct": 0.0, "s3_n": 0, "s3_pct": 0.0, "s4_n": 0, "s4_pct": 0.0, "s5_n": 0, "s5_pct": 0.0, "s6_n": 0, "s6_pct": 0.0, "attend_rate_of_scheduled": null}, {"week_start": "2026-07-20", "week_end": "2026-07-26", "days_since_start": 43, "conversations_n": 259, "inbox_n": 149, "conv_to_inbox_pct": 57.5, "s1_n": 36, "s1_pct": 24.2, "s2_sched_n": 26, "s2_sched_pct": 17.4, "s2_attended_n": 5, "s2_attended_pct": 3.4, "s2_n": 3, "s2_pct": 2.0, "s3_n": 1, "s3_pct": 0.7, "s4_n": 0, "s4_pct": 0.0, "s5_n": 0, "s5_pct": 0.0, "s6_n": 0, "s6_pct": 0.0, "attend_rate_of_scheduled": 19.2}, {"week_start": "2026-07-27", "week_end": "2026-08-02", "days_since_start": 36, "conversations_n": 382, "inbox_n": 202, "conv_to_inbox_pct": 52.9, "s1_n": 80, "s1_pct": 39.6, "s2_sched_n": 59, "s2_sched_pct": 29.2, "s2_attended_n": 9, "s2_attended_pct": 4.5, "s2_n": 9, "s2_pct": 4.5, "s3_n": 3, "s3_pct": 1.5, "s4_n": 1, "s4_pct": 0.5, "s5_n": 0, "s5_pct": 0.0, "s6_n": 0, "s6_pct": 0.0, "attend_rate_of_scheduled": 15.3}, {"week_start": "2026-08-03", "week_end": "2026-08-09", "days_since_start": 29, "conversations_n": 357, "inbox_n": 181, "conv_to_inbox_pct": 50.7, "s1_n": 76, "s1_pct": 42.0, "s2_sched_n": 63, "s2_sched_pct": 34.8, "s2_attended_n": 6, "s2_attended_pct": 3.3, "s2_n": 6, "s2_pct": 3.3, "s3_n": 0, "s3_pct": 0.0, "s4_n": 0, "s4_pct": 0.0, "s5_n": 0, "s5_pct": 0.0, "s6_n": 0, "s6_pct": 0.0, "attend_rate_of_scheduled": 9.5}, {"week_start": "2026-08-10", "week_end": "2026-08-16", "days_since_start": 22, "conversations_n": 347, "inbox_n": 190, "conv_to_inbox_pct": 54.8, "s1_n": 62, "s1_pct": 32.6, "s2_sched_n": 43, "s2_sched_pct": 22.6, "s2_attended_n": 3, "s2_attended_pct": 1.6, "s2_n": 3, "s2_pct": 1.6, "s3_n": 0, "s3_pct": 0.0, "s4_n": 0, "s4_pct": 0.0, "s5_n": 0, "s5_pct": 0.0, "s6_n": 0, "s6_pct": 0.0, "attend_rate_of_scheduled": 7.0}, {"week_start": "2026-08-17", "week_end": "2026-08-23", "days_since_start": 15, "conversations_n": 377, "inbox_n": 202, "conv_to_inbox_pct": 53.6, "s1_n": 64, "s1_pct": 31.7, "s2_sched_n": 51, "s2_sched_pct": 25.2, "s2_attended_n": 3, "s2_attended_pct": 1.5, "s2_n": 1, "s2_pct": 0.5, "s3_n": 0, "s3_pct": 0.0, "s4_n": 0, "s4_pct": 0.0, "s5_n": 0, "s5_pct": 0.0, "s6_n": 0, "s6_pct": 0.0, "attend_rate_of_scheduled": 5.9}, {"week_start": "2026-08-24", "week_end": "2026-08-30", "days_since_start": 8, "conversations_n": 227, "inbox_n": 118, "conv_to_inbox_pct": 52.0, "s1_n": 31, "s1_pct": 26.3, "s2_sched_n": 22, "s2_sched_pct": 18.6, "s2_attended_n": 2, "s2_attended_pct": 1.7, "s2_n": 0, "s2_pct": 0.0, "s3_n": 0, "s3_pct": 0.0, "s4_n": 0, "s4_pct": 0.0, "s5_n": 0, "s5_pct": 0.0, "s6_n": 0, "s6_pct": 0.0, "attend_rate_of_scheduled": 9.1}, {"week_start": "2026-08-31", "week_end": "2026-09-06", "days_since_start": 1, "conversations_n": 73, "inbox_n": 36, "conv_to_inbox_pct": 49.3, "s1_n": 5, "s1_pct": 13.9, "s2_sched_n": 2, "s2_sched_pct": 5.6, "s2_attended_n": 0, "s2_attended_pct": 0.0, "s2_n": 0, "s2_pct": 0.0, "s3_n": 0, "s3_pct": 0.0, "s4_n": 0, "s4_pct": 0.0, "s5_n": 0, "s5_pct": 0.0, "s6_n": 0, "s6_pct": 0.0, "attend_rate_of_scheduled": 0.0}];
-const TOTALS = {"conversations_n": 2217, "inbox_n": 1133, "s1_n": 354, "s2_attended_n": 28, "s2_n": 22, "s3_n": 4, "s4_n": 1, "s5_n": 0, "s6_n": 0};
+const WEEKS = [{"week_start": "2026-07-13", "week_end": "2026-07-19", "days_since_start": 50, "conversations_n": 195, "inbox_n": 55, "conv_to_inbox_pct": 28.2, "s1_n": 0, "s1_pct": 0.0, "s2_sched_n": 0, "s2_sched_pct": 0.0, "s2_attended_n": 0, "s2_attended_pct": 0.0, "s2_n": 0, "s2_pct": 0.0, "s3_n": 0, "s3_pct": 0.0, "s4_n": 0, "s4_pct": 0.0, "s5_n": 0, "s5_pct": 0.0, "s6_n": 0, "s6_pct": 0.0, "s2_sched_pct_seq": null, "s2_pct_seq": null, "s3_pct_seq": null, "s4_pct_seq": null, "s5_pct_seq": null, "s6_pct_seq": null, "attend_rate_of_scheduled": null}, {"week_start": "2026-07-20", "week_end": "2026-07-26", "days_since_start": 43, "conversations_n": 259, "inbox_n": 149, "conv_to_inbox_pct": 57.5, "s1_n": 36, "s1_pct": 24.2, "s2_sched_n": 26, "s2_sched_pct": 17.4, "s2_attended_n": 5, "s2_attended_pct": 3.4, "s2_n": 3, "s2_pct": 2.0, "s3_n": 1, "s3_pct": 0.7, "s4_n": 0, "s4_pct": 0.0, "s5_n": 0, "s5_pct": 0.0, "s6_n": 0, "s6_pct": 0.0, "s2_sched_pct_seq": 72.2, "s2_pct_seq": 11.5, "s3_pct_seq": 33.3, "s4_pct_seq": 0.0, "s5_pct_seq": null, "s6_pct_seq": null, "attend_rate_of_scheduled": 19.2}, {"week_start": "2026-07-27", "week_end": "2026-08-02", "days_since_start": 36, "conversations_n": 382, "inbox_n": 202, "conv_to_inbox_pct": 52.9, "s1_n": 80, "s1_pct": 39.6, "s2_sched_n": 59, "s2_sched_pct": 29.2, "s2_attended_n": 9, "s2_attended_pct": 4.5, "s2_n": 9, "s2_pct": 4.5, "s3_n": 3, "s3_pct": 1.5, "s4_n": 1, "s4_pct": 0.5, "s5_n": 0, "s5_pct": 0.0, "s6_n": 0, "s6_pct": 0.0, "s2_sched_pct_seq": 73.8, "s2_pct_seq": 15.3, "s3_pct_seq": 33.3, "s4_pct_seq": 33.3, "s5_pct_seq": 0.0, "s6_pct_seq": null, "attend_rate_of_scheduled": 15.3}, {"week_start": "2026-08-03", "week_end": "2026-08-09", "days_since_start": 29, "conversations_n": 357, "inbox_n": 181, "conv_to_inbox_pct": 50.7, "s1_n": 76, "s1_pct": 42.0, "s2_sched_n": 63, "s2_sched_pct": 34.8, "s2_attended_n": 6, "s2_attended_pct": 3.3, "s2_n": 6, "s2_pct": 3.3, "s3_n": 0, "s3_pct": 0.0, "s4_n": 0, "s4_pct": 0.0, "s5_n": 0, "s5_pct": 0.0, "s6_n": 0, "s6_pct": 0.0, "s2_sched_pct_seq": 82.9, "s2_pct_seq": 9.5, "s3_pct_seq": 0.0, "s4_pct_seq": null, "s5_pct_seq": null, "s6_pct_seq": null, "attend_rate_of_scheduled": 9.5}, {"week_start": "2026-08-10", "week_end": "2026-08-16", "days_since_start": 22, "conversations_n": 347, "inbox_n": 190, "conv_to_inbox_pct": 54.8, "s1_n": 62, "s1_pct": 32.6, "s2_sched_n": 43, "s2_sched_pct": 22.6, "s2_attended_n": 3, "s2_attended_pct": 1.6, "s2_n": 3, "s2_pct": 1.6, "s3_n": 0, "s3_pct": 0.0, "s4_n": 0, "s4_pct": 0.0, "s5_n": 0, "s5_pct": 0.0, "s6_n": 0, "s6_pct": 0.0, "s2_sched_pct_seq": 69.4, "s2_pct_seq": 7.0, "s3_pct_seq": 0.0, "s4_pct_seq": null, "s5_pct_seq": null, "s6_pct_seq": null, "attend_rate_of_scheduled": 7.0}, {"week_start": "2026-08-17", "week_end": "2026-08-23", "days_since_start": 15, "conversations_n": 377, "inbox_n": 202, "conv_to_inbox_pct": 53.6, "s1_n": 64, "s1_pct": 31.7, "s2_sched_n": 51, "s2_sched_pct": 25.2, "s2_attended_n": 3, "s2_attended_pct": 1.5, "s2_n": 1, "s2_pct": 0.5, "s3_n": 0, "s3_pct": 0.0, "s4_n": 0, "s4_pct": 0.0, "s5_n": 0, "s5_pct": 0.0, "s6_n": 0, "s6_pct": 0.0, "s2_sched_pct_seq": 79.7, "s2_pct_seq": 2.0, "s3_pct_seq": 0.0, "s4_pct_seq": null, "s5_pct_seq": null, "s6_pct_seq": null, "attend_rate_of_scheduled": 5.9}, {"week_start": "2026-08-24", "week_end": "2026-08-30", "days_since_start": 8, "conversations_n": 227, "inbox_n": 118, "conv_to_inbox_pct": 52.0, "s1_n": 31, "s1_pct": 26.3, "s2_sched_n": 22, "s2_sched_pct": 18.6, "s2_attended_n": 2, "s2_attended_pct": 1.7, "s2_n": 0, "s2_pct": 0.0, "s3_n": 0, "s3_pct": 0.0, "s4_n": 0, "s4_pct": 0.0, "s5_n": 0, "s5_pct": 0.0, "s6_n": 0, "s6_pct": 0.0, "s2_sched_pct_seq": 71.0, "s2_pct_seq": 0.0, "s3_pct_seq": null, "s4_pct_seq": null, "s5_pct_seq": null, "s6_pct_seq": null, "attend_rate_of_scheduled": 9.1}, {"week_start": "2026-08-31", "week_end": "2026-09-06", "days_since_start": 1, "conversations_n": 73, "inbox_n": 36, "conv_to_inbox_pct": 49.3, "s1_n": 5, "s1_pct": 13.9, "s2_sched_n": 2, "s2_sched_pct": 5.6, "s2_attended_n": 0, "s2_attended_pct": 0.0, "s2_n": 0, "s2_pct": 0.0, "s3_n": 0, "s3_pct": 0.0, "s4_n": 0, "s4_pct": 0.0, "s5_n": 0, "s5_pct": 0.0, "s6_n": 0, "s6_pct": 0.0, "s2_sched_pct_seq": 40.0, "s2_pct_seq": 0.0, "s3_pct_seq": null, "s4_pct_seq": null, "s5_pct_seq": null, "s6_pct_seq": null, "attend_rate_of_scheduled": 0.0}];
+const TOTALS = {"conversations_n": 2217, "inbox_n": 1133, "s1_n": 354, "s2_sched_n": 266, "s2_attended_n": 28, "s2_n": 22, "s3_n": 4, "s4_n": 1, "s5_n": 0, "s6_n": 0};
 
 const MESES = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
 function fmtShort(iso){
@@ -617,11 +617,17 @@ document.getElementById('attendTrend').innerHTML = trendWeeks.map(w => {
 // ---------- Table ----------
 function pctClass(p){
   if (p === 0) return 'lo';
-  if (p >= 15) return 'hi';
-  if (p >= 3) return 'mid';
+  if (p >= 50) return 'hi';
+  if (p >= 15) return 'mid';
   return 'lo';
 }
 function cell(nVal, pVal, opts={}){
+  if (pVal === null || pVal === undefined) {
+    return `<td class="num">
+      <div class="cell-n">${n(nVal)}</div>
+      <div class="cell-pct">—</div>
+    </td>`;
+  }
   const cls = opts.forcePct ? opts.forcePct : pctClass(pVal);
   return `<td class="num">
     <div class="cell-n">${n(nVal)}</div>
@@ -653,12 +659,12 @@ document.getElementById('tbody').innerHTML = WEEKS.map(w => {
     <td class="num"><div class="cell-n">${n(w.conversations_n)}</div></td>
     ${cell(w.inbox_n, w.conv_to_inbox_pct)}
     ${cell(w.s1_n, w.s1_pct)}
-    ${cell(w.s2_sched_n, w.s2_sched_pct)}
-    ${cell(w.s2_n, w.s2_pct)}
-    ${cell(w.s3_n, w.s3_pct)}
-    ${cell(w.s4_n, w.s4_pct)}
-    ${cell(w.s5_n, w.s5_pct)}
-    ${cell(w.s6_n, w.s6_pct)}
+    ${cell(w.s2_sched_n, w.s2_sched_pct_seq)}
+    ${cell(w.s2_n, w.s2_pct_seq)}
+    ${cell(w.s3_n, w.s3_pct_seq)}
+    ${cell(w.s4_n, w.s4_pct_seq)}
+    ${cell(w.s5_n, w.s5_pct_seq)}
+    ${cell(w.s6_n, w.s6_pct_seq)}
     <td class="spark">${funnelBars(w)}</td>
   </tr>`;
 }).join('');
